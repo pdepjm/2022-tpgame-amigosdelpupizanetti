@@ -21,6 +21,20 @@ object jugador {
 			enMovimiento = true
 			game.onTick(50,"moverseA",{self.moverA(dir)})
 		}
+		// Para que tenga orientacion el personaje-
+		/*if (dir == arriba){
+			image = "marioArriba.png"
+		}
+		if(dir == abajo){
+			image = "marioAbajo.png"
+		}
+		if(dir == derecha){
+			image = "marioDerecha.png"
+		}
+		if(dir == izquierda){
+			image = "marioIzquierda.png"
+		}
+		*/
 	}
 	method moverA(dir) {
 		anterior = position
