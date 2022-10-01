@@ -1,10 +1,11 @@
-# Nombre del juego (<- borrar y completar)
+# Tomb of de Fulbo
 
 ## Equipo de desarrollo
 
-- Alguien
-- Persona
-- etc.
+- Gurruchaga
+- Ondjian
+- Prestia
+- Rodriguez
 
 ## Capturas
 
