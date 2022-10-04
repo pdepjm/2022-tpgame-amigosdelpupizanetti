@@ -54,10 +54,12 @@ object jugador {
 
 class Estrella{
 	var property position
+	const sonicRing = game.sound("sonicRing.mp3")
 	method image() {return "estrella.png"}
 	method choque(pj) {
 		pj.sumarEstrella()
-		game.sound("sonicRing.mp3").play()
+		sonicRing.play()
+		sonicRing.volume(0.2)
 		game.removeVisual(self)
 	}
 }

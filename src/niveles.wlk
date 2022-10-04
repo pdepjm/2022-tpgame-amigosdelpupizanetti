@@ -6,7 +6,7 @@ object primerPartido {
 		const jugadoresArgentina = [game.origin().up(1).right(3),game.origin().up(12).right(2),game.origin().up(11).right(3),game.origin().up(10).right(1)]
 		const jugadoresPolonia = []
 		const estrellasNivel = []
-		
+		game.boardGround("canchita.jpg")
 		jugadoresPolonia.add(game.origin().up(9).right(4))
 		jugadoresPolonia.add(game.origin().up(13).right(11))
 		jugadoresPolonia.add(game.origin().up(11).right(10))

@@ -3,18 +3,16 @@ import objetos.*
 import direcciones.*
 import niveles.*
 object juego {
-	
+	const musicaDeFondo = game.sound("betterTogether.mp3")
 	method iniciar() {
 		self.hacerConfiguracionInicial()
 		self.agregarObjetos()
-		primerPartido.cargar()
 		self.configurarTeclas()
-		game.boardGround("canchita.jpg")
 		game.start()
-		
+		primerPartido.cargar()
 		game.schedule(1000,{game.say(jugador,"Me muevo con WASD")})	
-		game.sound("betterTogether.mp3").play()
-		//game.sound("betterTogether.mp3").volume(0.1)
+		musicaDeFondo.play()
+		musicaDeFondo.volume(0.02)
 	}
 	method hacerConfiguracionInicial() {
 		game.title("Qatar2022Run")
