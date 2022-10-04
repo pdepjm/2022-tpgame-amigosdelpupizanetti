@@ -57,7 +57,7 @@ class Estrella{
 	method image() {return "estrella.png"}
 	method choque(pj) {
 		pj.sumarEstrella()
-		
+		game.sound("sonicRing.mp3").play()
 		game.removeVisual(self)
 	}
 }
@@ -87,3 +87,11 @@ object copa {
 	method image() {return "copa.png"}
 }
 
+class Tarjeta {
+	var property position
+	var property image
+	var property roja
+	method image() {return image}
+	
+	
+}

@@ -1,18 +1,20 @@
 import wollok.game.*
 import objetos.*
 import direcciones.*
-
+import niveles.*
 object juego {
 	
 	method iniciar() {
 		self.hacerConfiguracionInicial()
 		self.agregarObjetos()
-		self.nivel1()
+		nivel1.cargar()
 		self.configurarTeclas()
 		game.boardGround("canchita.jpg")
 		game.start()
 		
 		game.schedule(1000,{game.say(jugador,"Me muevo con WASD")})	
+		game.sound("betterTogether.mp3").play()
+		//game.sound("betterTogether.mp3").volume(0.1)
 	}
 	method hacerConfiguracionInicial() {
 		game.title("TombOfTheFulbo")
@@ -20,25 +22,7 @@ object juego {
 		game.height(15) 
 	}
 	
-	method nivel1(){
-		const jugadoresArgentina = [game.origin().up(1).right(3),game.origin().up(12).right(2),game.origin().up(11).right(3),game.origin().up(10).right(1)]
-		const jugadoresPolonia = []
-		const estrellasNivel = []
-		
-		jugadoresPolonia.add(game.origin().up(9).right(4))
-		jugadoresPolonia.add(game.origin().up(13).right(11))
-		jugadoresPolonia.add(game.origin().up(11).right(10))
-		
-		jugadoresPolonia.add(game.origin().up(3).right(4))
-		jugadoresPolonia.add(game.origin().up(2).right(12))
-		// en 2:12 segunda estrella
-		estrellasNivel.add(game.origin().up(12).right(3))
-		estrellasNivel.add(game.origin().up(2).right(11))
-		estrellasNivel.add(game.origin().up(3).right(1))
-		jugadoresArgentina.forEach{pos=>self.nuevaPared(pos,"mbappe.png")}
-		jugadoresPolonia.forEach{pos=>self.nuevaPared(pos,"hinchaRiver.png")}
-		estrellasNivel.forEach{pos=>self.nuevaEstrella(pos)}
-	}
+
 	method agregarObjetos() {
 		self.agregarJugador()
 		//limites
