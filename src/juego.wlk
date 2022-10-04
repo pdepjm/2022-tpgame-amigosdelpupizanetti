@@ -7,7 +7,7 @@ object juego {
 	method iniciar() {
 		self.hacerConfiguracionInicial()
 		self.agregarObjetos()
-		nivel1.cargar()
+		primerPartido.cargar()
 		self.configurarTeclas()
 		game.boardGround("canchita.jpg")
 		game.start()
@@ -17,7 +17,7 @@ object juego {
 		//game.sound("betterTogether.mp3").volume(0.1)
 	}
 	method hacerConfiguracionInicial() {
-		game.title("TombOfTheFulbo")
+		game.title("Qatar2022Run")
 		game.width(15)
 		game.height(15) 
 	}

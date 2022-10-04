@@ -1,7 +1,7 @@
 import wollok.game.*
 import objetos.*
 import juego.*
-object nivel1 {
+object primerPartido {
 	method cargar() {
 		const jugadoresArgentina = [game.origin().up(1).right(3),game.origin().up(12).right(2),game.origin().up(11).right(3),game.origin().up(10).right(1)]
 		const jugadoresPolonia = []
