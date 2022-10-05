@@ -8,6 +8,7 @@ object juego {
 		self.hacerConfiguracionInicial()
 		self.agregarObjetos()
 		self.configurarTeclas()
+		game.boardGround("canchita.jpg")
 		game.start()
 		primerPartido.cargar()
 		game.schedule(1000,{game.say(jugador,"Me muevo con WASD")})	
@@ -33,20 +34,28 @@ object juego {
 	}
 	method agregarJugador() {
 		game.addVisual(jugador) 
+		game.onCollideDo(jugador,{personaje=>personaje.choque(jugador)})
 	}
 
 	method nuevaPared(posicion,imagen){
 		const pared = new Pared(position = posicion,image=imagen)
 		game.addVisual(pared)
-		game.onCollideDo(pared,{personaje=>personaje.chocar(pared)})
 	}
 	
 	method nuevaEstrella(posicion){
 		const estrella = new Estrella(position = posicion)
 		game.addVisual(estrella)
-		game.onCollideDo(estrella,{personaje=>personaje.chocar(estrella)})
 	}
-	
+	method nuevaTarjeta(posicion,color){
+		const tarjeta = new Tarjeta(position = posicion,roja = color)
+		game.addVisual(tarjeta)
+	}
+	method nuevoJuez(posicion,color){
+		const juez = new Juez(position = posicion,roja = color)
+		game.addVisual(juez)
+		game.onCollideDo(juez,{personaje=>personaje.choque(juez)})
+		juez.movimiento()
+	}
 	method aparecerCopa() {
 		
 		copa.tocarPosicion(game.origin().up(1).right(4))
@@ -59,7 +68,6 @@ object juego {
 		keyboard.d().onPressDo({jugador.movimiento(derecha)})
 		keyboard.s().onPressDo({jugador.movimiento(abajo)})
 		keyboard.a().onPressDo({jugador.movimiento(izquierda)})
-		
+
 	}
-	
-	}
+}
