@@ -46,6 +46,7 @@ object juego {
 		const estrella = new Estrella(position = posicion)
 		game.addVisual(estrella)
 	}
+	//
 	method nuevaTarjeta(posicion,color){
 		const tarjeta = new Tarjeta(position = posicion,roja = color)
 		game.addVisual(tarjeta)
