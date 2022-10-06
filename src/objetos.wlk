@@ -117,6 +117,7 @@ class Juez {
 		if(roja|| pj.cuantasAmarillas()==1) game.allVisuals().forEach{objeto=>game.removeVisual(objeto)} else pj.sumarTarjeta()
 		
 	}
+	//
 	method modificarPosicion(pos) {
 		position = pos
 	}

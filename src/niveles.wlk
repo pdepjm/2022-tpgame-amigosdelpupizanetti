@@ -28,3 +28,4 @@ object primerPartido {
 		juez.forEach{pos=>juego.nuevoJuez(pos,true)}
 	}
 }
+//

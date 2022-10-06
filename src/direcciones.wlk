@@ -13,7 +13,7 @@ object arriba {
         return numero.toString()+".png"
     }
 }
-
+//
 object derecha {
     var numero
     method restart() {numero=40}
