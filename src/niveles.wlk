@@ -1,7 +1,8 @@
 import wollok.game.*
 import objetos.*
 import juego.*
-object primerPartido {
+
+object nivel1{
 	method cargar() {
 		const jugadoresArgentina = [game.origin().up(1).right(3),game.origin().up(12).right(2),game.origin().up(11).right(3),game.origin().up(10).right(1)]
 		const jugadoresPolonia = []
@@ -26,5 +27,20 @@ object primerPartido {
 		jugadoresPolonia.forEach{pos=>juego.nuevaPared(pos,"hinchaRiver.png")}
 		estrellasNivel.forEach{pos=>juego.nuevaEstrella(pos)}
 		juez.forEach{pos=>juego.nuevoJuez(pos,false)}
+		
+		juego.agregarObjetos()
 	}
+	method posicion () = game.center().left(5).down(3)
+}
+object nivel2{
+	method cargar() {
+
+	}
+	method posicion () = game.center().down(3)
+}
+object nivel3{
+	method cargar() {
+		
+	}
+	method posicion () = game.center().right(5).down(3)
 }

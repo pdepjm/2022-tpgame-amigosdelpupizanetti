@@ -1,6 +1,7 @@
 import wollok.game.*
 import juego.*
 import direcciones.*
+import niveles.*
 
 object jugador {
 	var amarillas =0
@@ -9,6 +10,12 @@ object jugador {
 	var anterior
 	var property image = "11.png"
 	var cantEstrellas = 0
+
+	method choque(pj){
+		if( /**/pj.cuantasAmarillas()==1 && pj == self) game.allVisuals().forEach{objeto=>game.removeVisual(objeto)} else pj.sumarTarjeta()
+		game.removeVisual(self)
+	
+	}
 	
 	method sumarTarjeta(){
 		amarillas=amarillas+1
@@ -99,7 +106,7 @@ class Tarjeta {
 	var property position
 	var property roja
 	method choque(pj){
-		if(roja|| pj.cuantasAmarillas()==1) game.allVisuals().forEach{objeto=>game.removeVisual(objeto)} else pj.sumarTarjeta()
+		if(roja|| pj.cuantasAmarillas()==1 && pj == jugador) game.allVisuals().forEach{objeto=>game.removeVisual(objeto)} else pj.sumarTarjeta()
 		game.removeVisual(self)
 	}
 	method image() = if(roja) "roja.png" else "amarilla.png"	
@@ -129,3 +136,35 @@ class Juez inherits Tarjeta {
 
 	override method image() = if(roja) "arbitroRoja.png" else "arbitroAmarilla.png"
 }
+
+class CuadradoNivel{
+	var property image
+	var property position
+	
+}
+
+object flecha{
+	var property image = "unknown3.png"
+	var property position = game.center().left(5).down(3)
+	
+	var numPosition = 0
+	//const posicion = [game.center().left(5).down(3),game.center().down(3),game.center().down(3).right(5)]
+	const niveles = [nivel1, nivel2, nivel3]
+	method cambiarSeleccion(mov){
+		if(mov == 1){
+			numPosition = 2.min(numPosition+1)
+			position = niveles.get(numPosition).posicion()
+		}else{
+			numPosition = 0.max(numPosition-1)
+			position = niveles.get(numPosition).posicion()
+		}
+		
+		}
+		
+	method enter(){
+		game.allVisuals().forEach{objeto=>game.removeVisual(objeto)}
+		niveles.get(numPosition).cargar()
+	}
+
+}
+
