@@ -25,6 +25,6 @@ object primerPartido {
 		jugadoresArgentina.forEach{pos=>juego.nuevaPared(pos,"mbappe.png")}
 		jugadoresPolonia.forEach{pos=>juego.nuevaPared(pos,"hinchaRiver.png")}
 		estrellasNivel.forEach{pos=>juego.nuevaEstrella(pos)}
-		juez.forEach{pos=>juego.nuevoJuez(pos,true)}
+		juez.forEach{pos=>juego.nuevoJuez(pos,false)}
 	}
 }
