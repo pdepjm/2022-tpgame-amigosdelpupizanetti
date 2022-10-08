@@ -6,22 +6,40 @@ object juego {
 	const musicaDeFondo = game.sound("betterTogether.mp3")
 	method iniciar() {
 		self.hacerConfiguracionInicial()
-		self.agregarObjetos()
 		self.configurarTeclas()
+		//self.teclasMenu()
 		game.boardGround("canchita.jpg")
 		game.start()
-		primerPartido.cargar()
-		game.schedule(1000,{game.say(jugador,"Me muevo con WASD")})	
 		musicaDeFondo.play()
 		musicaDeFondo.volume(0.02)
+		self.cargarMenu()
+
 	}
+	
+	method cargarMenu(){
+		const opcion1 = new CuadradoNivel(position = game.center().left(5),image="cuadrado.png")
+		game.addVisual(opcion1)
+		const opcion2 = new CuadradoNivel(position = game.center(),image="cuadrado.png")
+		game.addVisual(opcion2)
+		const opcion3 = new CuadradoNivel(position = game.center().right(5),image="cuadrado.png")
+		game.addVisual(opcion3)
+		game.addVisual(flecha)
+	}
+	
+	 /* 
+			game.schedule(1000,{game.say(jugador,"Me muevo con WASD")})	
+			self.agregarObjetos()
+			primerPartido.cargar()
+	 */
+	
+
+	
 	method hacerConfiguracionInicial() {
 		game.title("Qatar2022Run")
 		game.width(15)
 		game.height(15) 
 	}
 	
-
 	method agregarObjetos() {
 		self.agregarJugador()
 		//limites
@@ -58,10 +76,13 @@ object juego {
 		juez.movimiento()
 	}
 	method aparecerCopa() {
-		
 		copa.tocarPosicion(game.origin().up(1).right(4))
 		game.addVisual(copa)
 		game.onCollideDo(copa,{personaje=>personaje.chocar(copa)})
+	}
+	
+	method teclasMenu(){
+		
 	}
 	
 	method configurarTeclas() {
@@ -69,6 +90,13 @@ object juego {
 		keyboard.d().onPressDo({jugador.movimiento(derecha)})
 		keyboard.s().onPressDo({jugador.movimiento(abajo)})
 		keyboard.a().onPressDo({jugador.movimiento(izquierda)})
+		keyboard.enter().onPressDo({flecha.enter()})
+		
+		keyboard.right().onPressDo({flecha.cambiarSeleccion(1)})
+		keyboard.left().onPressDo({flecha.cambiarSeleccion(2)})
 
 	}
 }
+
+
+

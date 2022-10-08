@@ -1,21 +1,23 @@
 import wollok.game.*
 import juego.*
 import direcciones.*
+import niveles.*
 
 object jugador {
 	var amarillas =0
 	var enMovimiento = false
-	var position = game.origin().up(1).right(1)
+	var property position = game.origin().up(1).right(1)
 	var anterior
-	var image = "11.png"
+	var property image = "11.png"
 	var cantEstrellas = 0
+	
+	method es(pj) = pj==self
 	
 	method sumarTarjeta(){
 		amarillas=amarillas+1
 	}
 	method cuantasAmarillas() = amarillas
-	method image() { return image}
-	method position() { return position}
+	
 	method anterior() = anterior
 	
 	method sumarEstrella() {
@@ -39,7 +41,6 @@ object jugador {
 	}
 	
 
-	
 	method movimiento(dir){
         if(enMovimiento.negate()){
             self.modificarMueve()
@@ -65,7 +66,7 @@ class Estrella{
 	const sonicRing = game.sound("sonicRing.mp3")
 	method image() {return "estrella.png"}
 	method choque(pj) {
-		if(pj==jugador){
+		if(jugador.es(pj)){
 		pj.sumarEstrella()
 		sonicRing.play()
 		sonicRing.volume(0.2)
@@ -78,7 +79,6 @@ class Estrella{
 class Pared {
 	var property position
 	var property image
-	method image() {return image}
 	method choque(pj){
 		pj.parar()
 		pj.modificarPosicion(pj.anterior())
@@ -102,27 +102,33 @@ class Tarjeta {
 	var property position
 	var property roja
 	method choque(pj){
-		if(roja|| pj.cuantasAmarillas()==1) game.allVisuals().forEach{objeto=>game.removeVisual(objeto)} else pj.sumarTarjeta()
-		game.removeVisual(self)
+		if((roja|| pj.cuantasAmarillas()==1) && jugador.es(pj)) game.allVisuals().forEach{objeto=>game.removeVisual(objeto)}
+		else{
+			if(jugador.es(pj)){
+				game.removeVisual(self)
+				pj.sumarTarjeta()
+				}
+		} 
+		
 	}
 	method image() = if(roja) "roja.png" else "amarilla.png"	
 }
 class Juez {
 	
-	var property position
-	var  roja
-	var  anterior = 0
+	var property anterior = game.center()
 	const movimientos= [izquierda,derecha,abajo,arriba] 
+	var property position
+	var property roja 
+	
 	method choque(pj){
-		if(roja|| pj.cuantasAmarillas()==1) game.allVisuals().forEach{objeto=>game.removeVisual(objeto)} else pj.sumarTarjeta()
-		
+		 game.allVisuals().forEach{objeto=>game.removeVisual(objeto)}
+		 pj.sumarTarjeta()
 	}
-	//
+	
 	method modificarPosicion(pos) {
 		position = pos
 	}
-	method position() { return position}
-	method anterior() = anterior
+	method sumarTarjeta(){}
 	method parar(){
 	game.removeTickEvent("moverJuez")
 	self.movimiento()
@@ -137,5 +143,36 @@ class Juez {
 		position = dir.siguientePosicion(position) 
 	}
 
-	method image() = "arbrito2.png"	
+	 method image() = if(roja) "arbitroRoja.png" else "arbitroAmarilla.png"
 }
+
+class CuadradoNivel{
+	var property image
+	var property position
+	
+}
+
+object flecha{
+	var property image = "unknown3.png"
+	var property position = game.center().left(5).down(3)
+	
+	var numPosition = 0
+	const niveles = [nivel1, nivel2, nivel3]
+	method cambiarSeleccion(mov){
+		if(mov == 1){
+			numPosition = 2.min(numPosition+1)
+			position = niveles.get(numPosition).posicion()
+		}else{
+			numPosition = 0.max(numPosition-1)
+			position = niveles.get(numPosition).posicion()
+		}
+		
+		}
+		
+	method enter(){
+		game.allVisuals().forEach{objeto=>game.removeVisual(objeto)}
+		niveles.get(numPosition).cargar()
+	}
+
+}
+
