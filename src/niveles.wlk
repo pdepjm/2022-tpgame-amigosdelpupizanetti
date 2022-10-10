@@ -16,7 +16,7 @@ object nivel1{
 		jugadoresPolonia.add(game.origin().up(3).right(4))
 		jugadoresPolonia.add(game.origin().up(2).right(12))
 		tarjetasRojas.add(game.origin().up(4).right(2))
-		tarjetasAmarillas.add(game.origin().up(6).right(1))
+		tarjetasAmarillas.add(game.origin().up(1).right(2))
 		estrellasNivel.add(game.origin().up(12).right(3))
 		estrellasNivel.add(game.origin().up(2).right(11))
 		estrellasNivel.add(game.origin().up(3).right(1))
@@ -28,7 +28,8 @@ object nivel1{
 		estrellasNivel.forEach{pos=>juego.nuevaEstrella(pos)}
 		juez.forEach{pos=>juego.nuevoJuez(pos,false)}
 		
-		juego.agregarObjetos()
+		juego.agregarParedes()
+		juego.agregarJugador()
 	}
 	method posicion () = game.center().left(5).down(3)
 }

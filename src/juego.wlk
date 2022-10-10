@@ -7,8 +7,6 @@ object juego {
 	method iniciar() {
 		self.hacerConfiguracionInicial()
 		self.configurarTeclas()
-		//self.teclasMenu()
-		game.boardGround("canchita.jpg")
 		game.start()
 		musicaDeFondo.play()
 		musicaDeFondo.volume(0.02)
@@ -17,6 +15,7 @@ object juego {
 	}
 	
 	method cargarMenu(){
+		
 		const opcion1 = new CuadradoNivel(position = game.center().left(5),image="cuadrado.png")
 		game.addVisual(opcion1)
 		const opcion2 = new CuadradoNivel(position = game.center(),image="cuadrado.png")
@@ -38,10 +37,11 @@ object juego {
 		game.title("Qatar2022Run")
 		game.width(15)
 		game.height(15) 
+		game.boardGround("canchita.jpg")
 	}
 	
-	method agregarObjetos() {
-		self.agregarJugador()
+	method agregarParedes() {
+		
 		//limites
 		const paredes = [game.origin()]
 		14.times({ i => paredes.add(game.origin().up(i))})
@@ -78,7 +78,7 @@ object juego {
 	method aparecerCopa() {
 		copa.tocarPosicion(game.origin().up(1).right(4))
 		game.addVisual(copa)
-		game.onCollideDo(copa,{personaje=>personaje.chocar(copa)})
+		
 	}
 	
 	method teclasMenu(){

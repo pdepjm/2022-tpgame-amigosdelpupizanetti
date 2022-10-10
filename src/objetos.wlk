@@ -10,7 +10,9 @@ object jugador {
 	var anterior
 	var property image = "11.png"
 	var cantEstrellas = 0
-	
+	method choque(x){
+		
+	}
 	method es(pj) = pj==self
 	
 	method sumarTarjeta(){
@@ -92,8 +94,12 @@ object copa {
 		position = pos
 	}
 	method choque(pj){
-		game.allVisuals().forEach{objeto=>game.removeVisual(objeto)}
-		juego.agregarObjetos()
+		if(jugador.es(pj)){
+		game.schedule(1000,{=>game.allVisuals().forEach{objeto=>game.removeVisual(objeto)}}) 
+		game.schedule(200,{=>game.say(jugador,"Ganamos el partido")})
+		game.schedule(2000,{=>juego.cargarMenu()})
+		game.removeTickEvent("moverJuez")
+		}
 	}
 	method image() =  "copa.png"
 }
@@ -102,9 +108,9 @@ class Tarjeta {
 	var property position
 	var property roja
 	method choque(pj){
+		if(jugador.es(pj)){
 		if((roja|| pj.cuantasAmarillas()==1) && jugador.es(pj)) game.allVisuals().forEach{objeto=>game.removeVisual(objeto)}
 		else{
-			if(jugador.es(pj)){
 				game.removeVisual(self)
 				pj.sumarTarjeta()
 				}
@@ -113,22 +119,15 @@ class Tarjeta {
 	}
 	method image() = if(roja) "roja.png" else "amarilla.png"	
 }
-class Juez {
+class Juez inherits Tarjeta {
 	
 	var property anterior = game.center()
 	const movimientos= [izquierda,derecha,abajo,arriba] 
-	var property position
-	var property roja 
-	
-	method choque(pj){
-		 game.allVisuals().forEach{objeto=>game.removeVisual(objeto)}
-		 pj.sumarTarjeta()
-	}
 	
 	method modificarPosicion(pos) {
 		position = pos
 	}
-	method sumarTarjeta(){}
+	
 	method parar(){
 	game.removeTickEvent("moverJuez")
 	self.movimiento()
@@ -143,7 +142,7 @@ class Juez {
 		position = dir.siguientePosicion(position) 
 	}
 
-	 method image() = if(roja) "arbitroRoja.png" else "arbitroAmarilla.png"
+	 override method image() = if(roja) "arbitroRoja.png" else "arbitroAmarilla.png"
 }
 
 class CuadradoNivel{
@@ -172,6 +171,7 @@ object flecha{
 	method enter(){
 		game.allVisuals().forEach{objeto=>game.removeVisual(objeto)}
 		niveles.get(numPosition).cargar()
+		
 	}
 
 }
