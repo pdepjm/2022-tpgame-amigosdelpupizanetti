@@ -95,6 +95,7 @@ object copa {
 	}
 	method choque(pj){
 		if(jugador.es(pj)){
+		
 		game.schedule(1000,{=>game.allVisuals().forEach{objeto=>game.removeVisual(objeto)}}) 
 		game.schedule(200,{=>game.say(jugador,"Ganamos el partido")})
 		game.schedule(2000,{=>juego.cargarMenu()})
@@ -113,6 +114,8 @@ class Tarjeta {
 		else{
 				game.removeVisual(self)
 				pj.sumarTarjeta()
+				game.say(jugador,"Tengo una amarilla")
+				game.sound("silbato.mp3").play()
 				}
 		} 
 		
@@ -152,11 +155,13 @@ class CuadradoNivel{
 }
 
 object flecha{
-	var property image = "unknown3.png"
+	
 	var property position = game.center().left(5).down(3)
 	
 	var numPosition = 0
+	
 	const niveles = [nivel1, nivel2, nivel3]
+	method image() = "flecha.png"
 	method cambiarSeleccion(mov){
 		if(mov == 1){
 			numPosition = 2.min(numPosition+1)
@@ -175,4 +180,6 @@ object flecha{
 	}
 
 }
+
+
 

@@ -15,22 +15,19 @@ object juego {
 	}
 	
 	method cargarMenu(){
-		
-		const opcion1 = new CuadradoNivel(position = game.center().left(5),image="cuadrado.png")
+		const copita = new CuadradoNivel(position = game.center().left(4).up(2),image="copitapixel.png")
+		game.addVisual(copita) 
+		const titulo = new CuadradoNivel(position = game.center().right(1).up(4),image="titulo.png")
+		game.addVisual(titulo) 
+		const opcion1 = new CuadradoNivel(position = game.center().left(5),image="nivel1.png")
 		game.addVisual(opcion1)
-		const opcion2 = new CuadradoNivel(position = game.center(),image="cuadrado.png")
+		const opcion2 = new CuadradoNivel(position = game.center(),image="nivel2.png")
 		game.addVisual(opcion2)
-		const opcion3 = new CuadradoNivel(position = game.center().right(5),image="cuadrado.png")
+		const opcion3 = new CuadradoNivel(position = game.center().right(5),image="nivel3.png")
 		game.addVisual(opcion3)
 		game.addVisual(flecha)
+		
 	}
-	
-	 /* 
-			game.schedule(1000,{game.say(jugador,"Me muevo con WASD")})	
-			self.agregarObjetos()
-			primerPartido.cargar()
-	 */
-	
 
 	
 	method hacerConfiguracionInicial() {
