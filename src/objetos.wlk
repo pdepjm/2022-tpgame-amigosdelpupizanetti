@@ -10,6 +10,11 @@ object jugador {
 	var anterior
 	var property image = "11.png"
 	var cantEstrellas = 0
+	var objetivo
+	method ponerObjetivo(nuevoObjetivo){
+		objetivo=nuevoObjetivo
+	}
+	
 	method choque(x){
 		
 	}
@@ -24,7 +29,7 @@ object jugador {
 	
 	method sumarEstrella() {
 		cantEstrellas = cantEstrellas + 1
-		if (cantEstrellas ==3){
+		if (cantEstrellas ==objetivo){
 			juego.aparecerCopa()
 		}
 	}
