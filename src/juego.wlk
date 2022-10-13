@@ -13,7 +13,23 @@ object juego {
 		self.cargarMenu()
 
 	}
-	
+	method perdiste(){
+		game.schedule(200,{=>game.say(jugador,"Perdimos el partido")})
+		//const copita = new CuadradoNivel(position = game.center().left(4).up(2),image="copitapixel.png")
+		//game.schedule(1000,{=>game.addVisual()}) 
+		game.schedule(1200,{=>game.allVisuals().forEach{objeto=>game.removeVisual(objeto)}})
+		game.schedule(2500,{=>self.cargarMenu()})
+		game.removeTickEvent("moverJuez")
+		jugador.setearBase()
+	}
+	method ganaste(){
+		game.schedule(1000,{=>game.allVisuals().forEach{objeto=>game.removeVisual(objeto)}}) 
+		game.schedule(200,{=>game.say(jugador,"Ganamos el partido")})
+		game.schedule(2000,{=>self.cargarMenu()})
+		game.removeTickEvent("moverJuez")
+		jugador.setearBase()
+		
+	}
 	method cargarMenu(){
 		const copita = new CuadradoNivel(position = game.center().left(4).up(2),image="copitapixel.png")
 		game.addVisual(copita) 
@@ -78,10 +94,7 @@ object juego {
 		
 	}
 	
-	method teclasMenu(){
-		
-	}
-	
+
 	method configurarTeclas() {
 		keyboard.w().onPressDo({jugador.movimiento(arriba)}) 
 		keyboard.d().onPressDo({jugador.movimiento(derecha)})
@@ -94,6 +107,7 @@ object juego {
 
 	}
 }
+
 
 
 
