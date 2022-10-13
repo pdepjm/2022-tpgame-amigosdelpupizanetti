@@ -43,7 +43,7 @@ object nivel2{
 							game.origin().up(6).right(2),game.origin().up(6).right(4),game.origin().up(6).right(6),game.origin().up(6).right(8),
 							game.origin().up(8).right(2),game.origin().up(8).right(4),game.origin().up(8).right(6),game.origin().up(8).right(8),game.origin().up(8).right(10),
 							game.origin().up(8).right(1),game.origin().up(7).right(1),game.origin().up(10).right(2),game.origin().up(10).right(4),game.origin().up(10).right(6),
-							game.origin().up(10).right(8),game.origin().up(10).right(11),game.origin().up(10).right(12),game.origin().up(10).right(13)]
+							game.origin().up(10).right(8),game.origin().up(10).right(11),game.origin().up(10).right(12),game.origin().up(10).right(13),game.origin().up(8).right(12)]
 		const estrellasNivel = []
 		estrellasNivel.add(game.origin().up(1).right(12))
 		estrellasNivel.add(game.origin().up(3).right(3))
@@ -72,4 +72,3 @@ object nivel3{
 	}
 	method posicion () = game.center().right(5).down(3)
 }
-//
