@@ -20,7 +20,7 @@ object nivel1{
 		estrellasNivel.add(game.origin().up(12).right(3))
 		estrellasNivel.add(game.origin().up(2).right(11))
 		estrellasNivel.add(game.origin().up(3).right(1))
-		jugador.ponerObjetivo(estrellasNivel.length())					
+		jugador.ponerObjetivo(estrellasNivel.size())					
 		
 		tarjetasRojas.forEach{pos=>juego.nuevaTarjeta(pos,true)}
 		tarjetasAmarillas.forEach{pos=>juego.nuevaTarjeta(pos,false)}
@@ -52,7 +52,7 @@ object nivel2{
 		estrellasNivel.add(game.origin().up(7).right(2))
 		estrellasNivel.add(game.origin().up(9).right(1))
 		estrellasNivel.add(game.origin().up(9).right(13))
-		jugador.ponerObjetivo(estrellasNivel.length())					
+		jugador.ponerObjetivo(estrellasNivel.size())					
 		paredesNuevas.forEach{pos=>juego.nuevaPared(pos,"mbappe.png")
 		const titulo = new CuadradoNivel(position = game.center().right(1).up(5),image="titulo.png")
 		game.addVisual(titulo) 
