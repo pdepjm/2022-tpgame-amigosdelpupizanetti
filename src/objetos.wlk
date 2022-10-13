@@ -18,6 +18,11 @@ object jugador {
 	method choque(x){
 		
 	}
+	method setearBase(){
+		self.modificarPosicion(game.origin().up(1).right(1))
+		amarillas=0
+		cantEstrellas=0
+	}
 	method es(pj) = pj==self
 	
 	method sumarTarjeta(){
@@ -100,22 +105,19 @@ object copa {
 	}
 	method choque(pj){
 		if(jugador.es(pj)){
-		
-		game.schedule(1000,{=>game.allVisuals().forEach{objeto=>game.removeVisual(objeto)}}) 
-		game.schedule(200,{=>game.say(jugador,"Ganamos el partido")})
-		game.schedule(2000,{=>juego.cargarMenu()})
-		game.removeTickEvent("moverJuez")
+			juego.ganaste()
 		}
 	}
 	method image() =  "copa.png"
 }
+
 
 class Tarjeta {
 	var property position
 	var property roja
 	method choque(pj){
 		if(jugador.es(pj)){
-		if((roja|| pj.cuantasAmarillas()==1) && jugador.es(pj)) game.allVisuals().forEach{objeto=>game.removeVisual(objeto)}
+		if((roja|| pj.cuantasAmarillas()==1) && jugador.es(pj)) juego.perdiste()
 		else{
 				game.removeVisual(self)
 				pj.sumarTarjeta()
@@ -125,6 +127,9 @@ class Tarjeta {
 		} 
 		
 	}
+
+	
+	
 	method image() = if(roja) "roja.png" else "amarilla.png"	
 }
 class Juez inherits Tarjeta {
