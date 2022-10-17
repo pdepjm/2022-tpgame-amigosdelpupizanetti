@@ -49,7 +49,7 @@ object juego {
 		game.addVisual(opcion3)
 		game.addVisual(flecha)
 		game.addVisual(pressStart)
-		
+		pressStart.cambiarFoto()
 	}
 
 	
