@@ -6,31 +6,36 @@ object juego {
 	const musicaDeFondo = game.sound("betterTogether.mp3")
 	method iniciar() {
 		self.hacerConfiguracionInicial()
-		self.configurarTeclas()
+		self.cargarMenu()
 		game.start()
 		musicaDeFondo.play()
 		musicaDeFondo.volume(0.02)
-		self.cargarMenu()
-
+		
+	}
+	method schedulizar() {
+		game.clear()
+		game.schedule(200,{=>self.cargarMenu()})
 	}
 	method perdiste(){
+		
+		const titulito = new CuadradoNivel(position = game.center().left(1),image="perdiste.png")
 		game.schedule(200,{=>game.say(jugador,"Perdimos el partido")})
-		//const copita = new CuadradoNivel(position = game.center().left(4).up(2),image="copitapixel.png")
-		//game.schedule(1000,{=>game.addVisual()}) 
-		game.schedule(1200,{=>game.allVisuals().forEach{objeto=>game.removeVisual(objeto)}})
-		game.schedule(2500,{=>self.cargarMenu()})
-		game.removeTickEvent("moverJuez")
+		game.schedule(500,{=>game.addVisual(titulito)}) 
+		game.schedule(2000,{=>self.schedulizar()})
 		jugador.setearBase()
 	}
 	method ganaste(){
-		game.schedule(1000,{=>game.allVisuals().forEach{objeto=>game.removeVisual(objeto)}}) 
+		const titulito = new CuadradoNivel(position = game.center().left(1),image="ganaste.png")
 		game.schedule(200,{=>game.say(jugador,"Ganamos el partido")})
-		game.schedule(2000,{=>self.cargarMenu()})
-		game.removeTickEvent("moverJuez")
+		game.schedule(500,{=>game.addVisual(titulito)}) 
+		game.schedule(2000,{=>self.schedulizar()})
 		jugador.setearBase()
 		
 	}
 	method cargarMenu(){
+		keyboard.enter().onPressDo({flecha.enter()})
+		keyboard.d().onPressDo({flecha.cambiarSeleccion(1)})
+		keyboard.a().onPressDo({flecha.cambiarSeleccion(2)})
 		const copita = new CuadradoNivel(position = game.center().left(4).up(2),image="copitapixel.png")
 		game.addVisual(copita) 
 		const titulo = new CuadradoNivel(position = game.center().right(1).up(4),image="titulo.png")
@@ -40,8 +45,10 @@ object juego {
 		const opcion2 = new CuadradoNivel(position = game.center(),image="nivel2.png")
 		game.addVisual(opcion2)
 		const opcion3 = new CuadradoNivel(position = game.center().right(5),image="nivel3.png")
+		
 		game.addVisual(opcion3)
 		game.addVisual(flecha)
+		game.addVisual(pressStart)
 		
 	}
 
@@ -95,17 +102,7 @@ object juego {
 	}
 	
 
-	method configurarTeclas() {
-		keyboard.w().onPressDo({jugador.movimiento(arriba)}) 
-		keyboard.d().onPressDo({jugador.movimiento(derecha)})
-		keyboard.s().onPressDo({jugador.movimiento(abajo)})
-		keyboard.a().onPressDo({jugador.movimiento(izquierda)})
-		keyboard.enter().onPressDo({flecha.enter()})
-		
-		keyboard.right().onPressDo({flecha.cambiarSeleccion(1)})
-		keyboard.left().onPressDo({flecha.cambiarSeleccion(2)})
-
-	}
+	
 }
 
 

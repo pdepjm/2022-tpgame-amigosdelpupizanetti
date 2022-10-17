@@ -1,0 +1,8 @@
+import wollok.game.*
+import objetos.*
+import direcciones.*
+import niveles.*
+import juego.*
+program Qatar2022Run {
+	juego.iniciar()
+}

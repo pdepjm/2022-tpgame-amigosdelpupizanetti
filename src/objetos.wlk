@@ -164,6 +164,27 @@ class CuadradoNivel{
 	
 }
 
+object pressStart{ 
+	var property image = "nada.png"
+	var property position = game.center().down(5)
+	method cambiarFoto() {
+		game.onTick(500,"cambiarFotito",{self.logica()})
+	}
+	method logica() {
+		if(image=="nada.png"){
+			game.removeVisual(self)
+			image="pressEnter.png"
+			game.addVisual(self)
+		} else {
+			game.removeVisual(self)
+			image="nada.png"
+			game.addVisual(self)
+			}
+	}
+		
+	
+}
+
 object flecha{
 	
 	var property position = game.center().left(5).down(3)
@@ -184,7 +205,7 @@ object flecha{
 		}
 		
 	method enter(){
-		game.allVisuals().forEach{objeto=>game.removeVisual(objeto)}
+		game.clear()
 		niveles.get(numPosition).cargar()
 		
 	}

@@ -32,11 +32,4 @@
 		<nature>org.eclipse.xtext.ui.shared.xtextNature</nature>
 		<nature>org.uqbar.project.wollok.wollokNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>assets/piedra.png</name>
-			<type>1</type>
-			<location>D:/Users/JUNIOR/Desktop/JUEGO PDP/piedra.png</location>
-		</link>
-	</linkedResources>
 </projectDescription>

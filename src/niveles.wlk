@@ -1,9 +1,13 @@
 import wollok.game.*
 import objetos.*
 import juego.*
-
+import direcciones.*
 object nivel1{
 	method cargar() {
+		keyboard.w().onPressDo({jugador.movimiento(arriba)}) 
+		keyboard.d().onPressDo({jugador.movimiento(derecha)})
+		keyboard.s().onPressDo({jugador.movimiento(abajo)})
+		keyboard.a().onPressDo({jugador.movimiento(izquierda)})
 		const jugadoresArgentina = [game.origin().up(1).right(3),game.origin().up(12).right(2),game.origin().up(11).right(3),game.origin().up(10).right(1)]
 		const jugadoresPolonia = []
 		const estrellasNivel = []
@@ -36,6 +40,10 @@ object nivel1{
 }
 object nivel2{
 	method cargar() {
+		keyboard.w().onPressDo({jugador.movimiento(arriba)}) 
+		keyboard.d().onPressDo({jugador.movimiento(derecha)})
+		keyboard.s().onPressDo({jugador.movimiento(abajo)})
+		keyboard.a().onPressDo({jugador.movimiento(izquierda)})
 		const paredesNuevas = [game.origin().up(1).right(13),game.origin().up(2).right(1),game.origin().up(2).right(3),game.origin().up(2).right(5),game.origin().up(2).right(7),
 							game.origin().up(2).right(9),game.origin().up(2).right(11),
 							game.origin().up(3).right(1),game.origin().up(4).right(13),game.origin().up(4).right(9),game.origin().up(4).right(12),
@@ -68,7 +76,10 @@ object nivel2{
 }
 object nivel3{
 	method cargar() {
-		
+		keyboard.w().onPressDo({jugador.movimiento(arriba)}) 
+		keyboard.d().onPressDo({jugador.movimiento(derecha)})
+		keyboard.s().onPressDo({jugador.movimiento(abajo)})
+		keyboard.a().onPressDo({jugador.movimiento(izquierda)})
 	}
 	method posicion () = game.center().right(5).down(3)
 }
