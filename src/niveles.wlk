@@ -4,42 +4,7 @@ import juego.*
 import direcciones.*
 object nivel1{
 	method cargar() {
-		keyboard.w().onPressDo({jugador.movimiento(arriba)}) 
-		keyboard.d().onPressDo({jugador.movimiento(derecha)})
-		keyboard.s().onPressDo({jugador.movimiento(abajo)})
-		keyboard.a().onPressDo({jugador.movimiento(izquierda)})
-		const jugadoresArgentina = [game.origin().up(1).right(3),game.origin().up(12).right(2),game.origin().up(11).right(3),game.origin().up(10).right(1)]
-		const jugadoresPolonia = []
-		const estrellasNivel = []
-		const tarjetasRojas = []
-		const tarjetasAmarillas = []
-		const juez = [game.center()]
-		jugadoresPolonia.add(game.origin().up(9).right(4))
-		jugadoresPolonia.add(game.origin().up(13).right(11))
-		jugadoresPolonia.add(game.origin().up(11).right(10))
-		jugadoresPolonia.add(game.origin().up(3).right(4))
-		jugadoresPolonia.add(game.origin().up(2).right(12))
-		tarjetasRojas.add(game.origin().up(4).right(2))
-		tarjetasAmarillas.add(game.origin().up(1).right(2))
-		estrellasNivel.add(game.origin().up(12).right(3))
-		estrellasNivel.add(game.origin().up(2).right(11))
-		estrellasNivel.add(game.origin().up(3).right(1))
-		jugador.ponerObjetivo(estrellasNivel.size())					
-		
-		tarjetasRojas.forEach{pos=>juego.nuevaTarjeta(pos,true)}
-		tarjetasAmarillas.forEach{pos=>juego.nuevaTarjeta(pos,false)}
-		jugadoresArgentina.forEach{pos=>juego.nuevaPared(pos,"mbappe.png")}
-		jugadoresPolonia.forEach{pos=>juego.nuevaPared(pos,"hinchaRiver.png")}
-		estrellasNivel.forEach{pos=>juego.nuevaEstrella(pos)}
-		juez.forEach{pos=>juego.nuevoJuez(pos,false)}
-		
-		juego.agregarParedes()
-		juego.agregarJugador()
-	}
-	method posicion () = game.center().left(5).down(3)
-}
-object nivel2{
-	method cargar() {
+		jugador.setearBase()
 		keyboard.w().onPressDo({jugador.movimiento(arriba)}) 
 		keyboard.d().onPressDo({jugador.movimiento(derecha)})
 		keyboard.s().onPressDo({jugador.movimiento(abajo)})
@@ -72,14 +37,62 @@ object nivel2{
 	juego.agregarParedes()
 	juego.agregarJugador()
 	}
-	method posicion () = game.center().down(3)
+	method posicion () = game.center().left(5).down(3)
+	
 }
-object nivel3{
+
+object nivel2{
+	
 	method cargar() {
+		jugador.setearBase()
 		keyboard.w().onPressDo({jugador.movimiento(arriba)}) 
 		keyboard.d().onPressDo({jugador.movimiento(derecha)})
 		keyboard.s().onPressDo({jugador.movimiento(abajo)})
 		keyboard.a().onPressDo({jugador.movimiento(izquierda)})
+		const jugadoresArgentina = [game.origin().up(1).right(3),game.origin().up(12).right(2),game.origin().up(11).right(3),game.origin().up(10).right(1)]
+		const jugadoresPolonia = []
+		const estrellasNivel = []
+		const tarjetasRojas = []
+		const tarjetasAmarillas = []
+		const juez = [game.center()]
+		jugadoresPolonia.add(game.origin().up(9).right(4))
+		jugadoresPolonia.add(game.origin().up(13).right(11))
+		jugadoresPolonia.add(game.origin().up(11).right(10))
+		jugadoresPolonia.add(game.origin().up(3).right(4))
+		jugadoresPolonia.add(game.origin().up(2).right(12))
+		tarjetasRojas.add(game.origin().up(4).right(2))
+		tarjetasAmarillas.add(game.origin().up(1).right(2))
+		
+		estrellasNivel.add(game.origin().up(12).right(3))
+		estrellasNivel.add(game.origin().up(2).right(11))
+		estrellasNivel.add(game.origin().up(3).right(1))
+		jugador.ponerObjetivo(estrellasNivel.size())					
+		
+		tarjetasRojas.forEach{pos=>juego.nuevaTarjeta(pos,true)}
+		tarjetasAmarillas.forEach{pos=>juego.nuevaTarjeta(pos,false)}
+		jugadoresArgentina.forEach{pos=>juego.nuevaPared(pos,"mbappe.png")}
+		jugadoresPolonia.forEach{pos=>juego.nuevaPared(pos,"hinchaRiver.png")}
+		estrellasNivel.forEach{pos=>juego.nuevaEstrella(pos)}
+		juez.forEach{pos=>juego.nuevoJuez(pos,false)}
+		
+		juego.agregarParedes()
+		juego.agregarJugador()
 	}
+	method posicion () = game.center().down(3)
+}
+
+object nivel3{
+	method cargar() {
+		jugador.setearBase()
+		keyboard.w().onPressDo({jugador.movimiento(arriba)}) 
+		keyboard.d().onPressDo({jugador.movimiento(derecha)})
+		keyboard.s().onPressDo({jugador.movimiento(abajo)})
+		keyboard.a().onPressDo({jugador.movimiento(izquierda)})
+		juego.agregarParedes()
+		juego.agregarJugador()
+		const poblas = [game.origin().up(1).right(4)]
+		poblas.forEach{pos=>juego.nuevoPobla(pos)}
+	}
+	
 	method posicion () = game.center().right(5).down(3)
 }

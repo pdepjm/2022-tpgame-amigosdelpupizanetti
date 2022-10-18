@@ -117,7 +117,7 @@ class Tarjeta {
 	var property roja
 	method choque(pj){
 		if(jugador.es(pj)){
-		if((roja|| pj.cuantasAmarillas()==1) && jugador.es(pj)) juego.perdiste()
+		if((roja|| pj.cuantasAmarillas()==1) && jugador.es(pj)) juego.perdiste(true)
 		else{
 				game.removeVisual(self)
 				pj.sumarTarjeta()
@@ -165,23 +165,36 @@ class CuadradoNivel{
 }
 
 object pressStart{ 
-	var property image = "nada.png"
+	var property image = "pressEnter.png"
 	var property position = game.center().down(5)
 	method cambiarFoto() {
 		game.onTick(500,"cambiarFotito",{self.logica()})
 	}
 	method logica() {
-		if(image=="nada.png"){
-			game.removeVisual(self)
-			image="pressEnter.png"
-			game.addVisual(self)
-		} else {
-			game.removeVisual(self)
-			image="nada.png"
-			game.addVisual(self)
-			}
+		if(game.hasVisual(self)) game.removeVisual(self) else game.addVisual(self)
 	}
 		
+	
+}
+
+class PoblaPeres{ 
+	var property image = "poblaPeres.png"
+	var property position = game.center().down(5)
+	var tilteado = false 
+	method choque(pj) {
+		if (tilteado) {
+			if(jugador.es(pj)) {
+				juego.perdiste(false)
+			} else {
+				game.removeVisual(pj) 
+			}
+		} 
+		else {
+		image = "poblaPeresEnojado.png"
+		game.say(self,"¡ESTOY ENOJADO!")
+		 tilteado = true
+		 }
+	}
 	
 }
 

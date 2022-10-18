@@ -16,20 +16,24 @@ object juego {
 		game.clear()
 		game.schedule(200,{=>self.cargarMenu()})
 	}
-	method perdiste(){
-		
+	method perdiste(tipo){
+		if (tipo) {
 		const titulito = new CuadradoNivel(position = game.center().left(1),image="perdiste.png")
 		game.schedule(200,{=>game.say(jugador,"Perdimos el partido")})
 		game.schedule(500,{=>game.addVisual(titulito)}) 
+		} else {
+			const titulito = new CuadradoNivel(position = game.center().left(1),image="moriste.png")
+			game.schedule(500,{=>game.addVisual(titulito)}) 
+		}
+		
 		game.schedule(2000,{=>self.schedulizar()})
-		jugador.setearBase()
+		
 	}
 	method ganaste(){
 		const titulito = new CuadradoNivel(position = game.center().left(1),image="ganaste.png")
 		game.schedule(200,{=>game.say(jugador,"Ganamos el partido")})
 		game.schedule(500,{=>game.addVisual(titulito)}) 
 		game.schedule(2000,{=>self.schedulizar()})
-		jugador.setearBase()
 		
 	}
 	method cargarMenu(){
@@ -61,8 +65,6 @@ object juego {
 	}
 	
 	method agregarParedes() {
-		
-		//limites
 		const paredes = [game.origin()]
 		14.times({ i => paredes.add(game.origin().up(i))})
 		14.times({ i => paredes.add(game.origin().right(i))})
@@ -78,6 +80,11 @@ object juego {
 	method nuevaPared(posicion,imagen){
 		const pared = new Pared(position = posicion,image=imagen)
 		game.addVisual(pared)
+	}
+	
+	method nuevoPobla(posicion){
+		const poblaPeres = new PoblaPeres(position = posicion)
+		game.addVisual(poblaPeres)
 	}
 	
 	method nuevaEstrella(posicion){
