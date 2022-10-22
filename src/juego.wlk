@@ -71,7 +71,10 @@ object juego {
 		13.times({ i => paredes.add(game.origin().up(14).right(i))})
 		14.times({ i => paredes.add(game.origin().up(i).right(14))})
 		paredes.forEach{pos=>self.nuevaPared(pos,"nada.png")}
+		game.addVisual(contador)
+		
 	}
+	
 	method agregarJugador() {
 		game.addVisual(jugador) 
 		game.onCollideDo(jugador,{personaje=>personaje.choque(jugador)})
@@ -95,6 +98,10 @@ object juego {
 	method nuevaTarjeta(posicion,color){
 		const tarjeta = new Tarjeta(position = posicion,roja = color)
 		game.addVisual(tarjeta)
+	}
+	method nuevo225(posicion){
+		const un225 = new Un225(position = posicion)
+		game.addVisual(un225)
 	}
 	method nuevoJuez(posicion,color){
 		const juez = new Juez(position = posicion,roja = color)

@@ -28,6 +28,9 @@ object jugador {
 	method sumarTarjeta(){
 		amarillas=amarillas+1
 	}
+	method resetarAmarillas(){
+		amarillas=0
+	}
 	method cuantasAmarillas() = amarillas
 	
 	method anterior() = anterior
@@ -196,6 +199,25 @@ class PoblaPeres{
 		 }
 	}
 	
+}
+class Un225{ 
+	var property image = "dosveinte.png"
+	var property position 
+	
+	method choque(pj) {
+		if  (jugador.es(pj)){
+			jugador.resetarAmarillas()
+		 	game.say(jugador,"Tengo 0 amarillas")
+		 	game.removeVisual(self)
+		} 
+			
+	}
+	
+}
+
+object contador {
+	method position() = game.at(11,12)
+	method image() = "tarjeta" + jugador.cuantasAmarillas() + ".png"
 }
 
 object flecha{
