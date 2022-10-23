@@ -9,7 +9,7 @@
 
 ## Capturas
 
-![mi foto](\capturas\menu.png)
+![mi foto](capturas\menu.png)
 
 ## Reglas de Juego / Instrucciones
 
