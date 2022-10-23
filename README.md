@@ -9,7 +9,7 @@
 
 ## Capturas
 
-(agregar)
+![mi foto](\fotos\foto.jpg)
 
 ## Reglas de Juego / Instrucciones
 
