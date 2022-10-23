@@ -1,4 +1,4 @@
-# Tomb of de Fulbo
+# Qatar 2022 Pixel Run
 
 ## Equipo de desarrollo
 
