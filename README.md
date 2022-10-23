@@ -10,14 +10,15 @@
 ## Capturas
 
 ![mi foto](capturas/menu.jpg)
-
+![mi foto](capturas/nivel1.jpg)
+![mi foto](capturas/nivel2.jpg)
+![mi foto](capturas/nivel2.jpg)
 ## Reglas de Juego / Instrucciones
 
-(Escribirlas)
-
+Agarre las estrellitas para que aparezca la copa!
+Cuidado con pablo perez, los arbitros y las tarjetas!
+No olvide de tocar el articulo 225 para anular sus amarillas!
 
 ## Otros
+Paradigmas de programación. Cursos K2004 y K2104
 
-- Curso/Facultad
-- Versión de wollok
-- Una vez terminado, no tenemos problemas en que el repositorio sea público / queremos manternerlo privado
