@@ -1,280 +1,138 @@
 import wollok.game.*
-import juego.*
+import objetos.*
 import direcciones.*
 import niveles.*
-
-object jugador {
-	var amarillas =0
-	var enMovimiento = false
-	var property position = game.at(1,1)
-	var anterior
-	var property image = "11.png"
-	var cantEstrellas = 0
-	var objetivo
-	method ponerObjetivo(nuevoObjetivo){
-		objetivo=nuevoObjetivo
-	}
-	
-	method choque(x){
+object juego {
+	const musicaDeFondo = game.sound("betterTogether.mp3")
+	method iniciar() {
+		self.hacerConfiguracionInicial()
+		self.cargarMenu()
+		game.start()
+		musicaDeFondo.play()
+		musicaDeFondo.volume(0.02)
 		
 	}
-	method setearBase(){
-		self.modificarPosicion(game.at(1,1))
-		amarillas=0
-		cantEstrellas=0
-	}
-	method es(pj) = pj==self
-	
-	method sumarTarjeta(){
-		amarillas=amarillas+1
-	}
-	method resetarAmarillas(){
-		amarillas=0
-	}
-	method cuantasAmarillas() = amarillas
-	
-	method anterior() = anterior
-	
-	method sumarEstrella() {
-		cantEstrellas = cantEstrellas + 1
-		if (cantEstrellas ==objetivo){
-			juego.aparecerCopa()
-		}
-	}
-	method modificarPosicion(pos) {
-		position = pos
-	}
-	
-	method parar(){
-		game.removeTickEvent("animacion")
-		game.removeTickEvent("moverseA")
-		self.modificarMueve()
-	}
-	method modificarMueve() {
-	
-		enMovimiento = enMovimiento.negate()
-	}
-	
-
-	method movimiento(dir){
-        if(enMovimiento.negate()){
-            self.modificarMueve()
-            dir.restart()
-            game.onTick(100,"moverseA",{self.moverA(dir)})
-            game.onTick(100,"animacion",{self.animacion(dir)})
-        }
-	}
-	
-	method animacion(dir){
-        image = dir.animacion(self)
-    }
-    
-	method moverA(dir) {
-		anterior = position
-		position = dir.siguientePosicion(position) 
-	}
-
-}
-
-class Estrella{
-	var property position
-	const sonicRing = game.sound("sonicRing.mp3")
-	method image() {return "estrella.png"}
-	method choque(pj) {
-		if(jugador.es(pj)){
-		pj.sumarEstrella()
-		sonicRing.play()
-		sonicRing.volume(0.2)
-		game.removeVisual(self)
-		}
-	}
-}
-
-
-class Pared {
-	var property position
-	var property image
-	method choque(pj){
-		pj.parar()
-		pj.modificarPosicion(pj.anterior())
-	}
-	
-}
-
-object copa { 
-	var property position = game.at(1,1)
-	method tocarPosicion(pos) {
-		position = pos
-	}
-	method choque(pj){
-		if(jugador.es(pj)){
-			juego.ganaste()
-		}
-	}
-	method image() =  "copa.png"
-}
-
-
-class Tarjeta {
-	var property position
-	var property roja
-	method choque(pj){
-		if(jugador.es(pj)){
-		if((roja|| pj.cuantasAmarillas()==1) && jugador.es(pj)) juego.perdiste(true)
-		else{
-				game.removeVisual(self)
-				pj.sumarTarjeta()
-				game.say(jugador,"Tengo una amarilla")
-				game.sound("silbato.mp3").play()
-				}
-		} 
-		
-	}
-
-	
-	
-	method image() = if(roja) "roja.png" else "amarilla.png"	
-}
-class Juez inherits Tarjeta {
-	
-	var property anterior = game.center()
-
-	method modificarPosicion(pos) {
-		position = pos
-	}
-	
-
-	method movimiento()
-	method moverA(dir) {
-		anterior = position
-		position = dir.siguientePosicion(position) 
-	}
-
-	 override method image() = if(roja) "arbitroRoja.png" else "arbitroAmarilla.png"
-}
-class JuezRandom inherits Juez {
-	
-	const movimientos= [izquierda,derecha,abajo,arriba] 
-	override method movimiento(){
-		const dir = movimientos.get(0.randomUpTo(4).truncate(0))
-        game.onTick(150,"moverJuezRandom",{self.moverA(dir)})
-	}
-	method parar(){
-	game.removeTickEvent("moverJuezRandom")
-	self.movimiento()
-	}
-	
-}
-
-class JuezDirecciones inherits Juez {
-	
-	const movimientos
-	var direccion = false
-	 override method movimiento(){
-		if (direccion){
-        game.onTick(200,"moverJuez",{self.moverA(movimientos.get(0))})
-        direccion = false
-        }
-        else{
-        game.onTick(200,"moverJuez",{self.moverA(movimientos.get(1))})
-        direccion = true
-        }
-        }
-        
-    method parar(){
-	game.removeTickEvent("moverJuez")
-	self.movimiento()
-	}
-	
-}
-
-
-
-class CuadradoNivel{
-	var property image
-	var property position
-	
-}
-
-object pressStart{ 
-	var property image = "pressEnter.png"
-	var property position = game.center().down(5)
-	method cambiarFoto() {
-		game.onTick(500,"cambiarFotito",{self.logica()})
-	}
-	method logica() {
-		if(game.hasVisual(self)) game.removeVisual(self) else game.addVisual(self)
-	}
-		
-	
-}
-
-class PoblaPeres{ 
-	var property image = "poblaPeres.png"
-	var property position = game.center().down(5)
-	var tilteado = false 
-	method choque(pj) {
-		if (tilteado) {
-			if(jugador.es(pj)) {
-				juego.perdiste(false)
-			} else {
-				game.removeVisual(pj) 
-			}
-		} 
-		else {
-		image = "poblaPeresEnojado.png"
-		game.say(self,"¡ESTOY ENOJADO!")
-		 tilteado = true
-		 }
-	}
-	
-}
-class Un225{ 
-	var property image = "dosveinte.png"
-	var property position 
-	
-	method choque(pj) {
-		if  (jugador.es(pj)){
-			jugador.resetarAmarillas()
-		 	game.say(jugador,"Tengo 0 amarillas")
-		 	game.removeVisual(self)
-		} 
-			
-	}
-	
-}
-
-object contador {
-	method position() = game.at(11,12)
-	method image() = "tarjeta" + jugador.cuantasAmarillas() + ".png"
-}
-
-object flecha{
-	
-	var property position = game.center().left(5).down(3)
-	
-	var numPosition = 0
-	
-	const niveles = [nivel1, nivel2, nivel3]
-	method image() = "flecha.png"
-	method cambiarSeleccion(mov){
-		if(mov == 1){
-			numPosition = 2.min(numPosition+1)
-			position = niveles.get(numPosition).posicion()
-		}else{
-			numPosition = 0.max(numPosition-1)
-			position = niveles.get(numPosition).posicion()
-		}
-		
-		}
-		
-	method enter(){
+	method volverAlMenu(imagen) {
 		game.clear()
-		niveles.get(numPosition).cargar()
+		const titulito = new CuadradoNivel(position = game.center().left(3),image=imagen)
+		game.schedule(100,{=>game.addVisual(titulito)}) 
+		game.schedule(2900,{=>game.removeVisual(titulito)}) 
+		game.schedule(3000,{=>self.cargarMenu()})
 		
 	}
+	method perdiste(tipo){
+		
+		if (tipo) {
+		game.schedule(200,{=>game.say(jugador,"Estoy expulsado")})
+		game.schedule(3000,{=>self.volverAlMenu("perdiste.png")})
+		
+		} else {
+			game.schedule(200,{=>game.say(jugador,"Me lesioné")})
+			game.schedule(3000,{=>self.volverAlMenu("moriste.png")})
+		}
+		
+		
+		
+	}
+	method ganaste(){
 
+		game.schedule(200,{=>game.say(jugador,"Ganamos el partido")})
+		
+		game.schedule(3000,{=>self.volverAlMenu("ganaste.png")})
+		
+	}
+	method cargarMenu(){
+		keyboard.enter().onPressDo({flecha.enter()})
+		keyboard.d().onPressDo({flecha.cambiarSeleccion(1)})
+		keyboard.a().onPressDo({flecha.cambiarSeleccion(2)})
+		const copita = new CuadradoNivel(position = game.center().left(4).up(2),image="copitapixel.png")
+		game.addVisual(copita) 
+		const titulo = new CuadradoNivel(position = game.center().right(1).up(4),image="titulo.png")
+		game.addVisual(titulo) 
+		const opcion1 = new CuadradoNivel(position = game.center().left(5),image="nivel1.png")
+		game.addVisual(opcion1)
+		const opcion2 = new CuadradoNivel(position = game.center(),image="nivel2.png")
+		game.addVisual(opcion2)
+		const opcion3 = new CuadradoNivel(position = game.center().right(5),image="nivel3.png")
+		
+		game.addVisual(opcion3)
+		game.addVisual(flecha)
+		game.addVisual(pressStart)
+		pressStart.cambiarFoto()
+	}
+
+	
+	method hacerConfiguracionInicial() {
+		game.title("Qatar2022Run")
+		game.width(15)
+		game.height(15) 
+		game.boardGround("canchita.jpg")
+	}
+	
+	method agregarParedes() {
+		const paredes = [game.origin()]
+		14.times({ i => paredes.add(game.origin().up(i))})
+		14.times({ i => paredes.add(game.origin().right(i))})
+		13.times({ i => paredes.add(game.origin().up(14).right(i))})
+		14.times({ i => paredes.add(game.origin().up(i).right(14))})
+		paredes.forEach{pos=>self.nuevaPared(pos,"nada.png")}
+		game.addVisual(contador)
+		
+	}
+	
+	method agregarJugador() {
+		game.addVisual(jugador) 
+		game.onCollideDo(jugador,{personaje=>personaje.choque(jugador)})
+	}
+
+	method nuevaPared(posicion,imagen){
+		const pared = new Pared(position = posicion,image=imagen)
+		game.addVisual(pared)
+	}
+	
+	method nuevoPobla(posicion){
+		const poblaPeres = new PoblaPeres(position = posicion)
+		game.addVisual(poblaPeres)
+	}
+	
+	method nuevaEstrella(posicion){
+		const estrella = new Estrella(position = posicion)
+		game.addVisual(estrella)
+	}
+	//
+	method nuevaTarjeta(posicion,color){
+		const tarjeta = new Tarjeta(position = posicion,roja = color)
+		game.addVisual(tarjeta)
+	}
+	method nuevo225(posicion){
+		const un225 = new Un225(position = posicion)
+		game.addVisual(un225)
+	}
+	method nuevoJuezRandom(posicion,color){
+		const juez = new JuezRandom(position = posicion,roja = color)
+		game.addVisual(juez)
+		game.onCollideDo(juez,{personaje=>personaje.choque(juez)})
+		juez.movimiento()
+	}
+	method nuevoJuezArribaAbajo(posicion,color){
+		const juez = new JuezDirecciones(position = posicion,roja = color,movimientos= [abajo,arriba] )
+		game.addVisual(juez)
+		game.onCollideDo(juez,{personaje=>personaje.choque(juez)})
+		juez.movimiento()
+	}
+	method nuevoJuezDerechaIzquierda(posicion,color){
+		const juez = new JuezDirecciones(position = posicion,roja = color, movimientos = [izquierda,derecha] )
+		game.addVisual(juez)
+		game.onCollideDo(juez,{personaje=>personaje.choque(juez)})
+		juez.movimiento()
+	}
+	method aparecerCopa() {
+		
+		game.addVisual(copa)
+		
+	}
+	
+
+	
 }
-
-
 
