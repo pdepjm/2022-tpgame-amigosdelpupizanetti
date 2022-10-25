@@ -10,8 +10,8 @@
 ## Capturas
 
 ![mi foto](capturas/menu.jpg)
-![mi foto](capturas/capturaNivel1.jpg)
-![mi foto](capturas/capturaNivel2.jpg)
+![mi foto](capturas/capturaNivel1.png)
+![mi foto](capturas/capturaNivel2.png)
 
 ## Reglas de Juego / Instrucciones
 
