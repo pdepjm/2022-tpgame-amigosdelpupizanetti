@@ -102,7 +102,7 @@ class Pared {
 }
 
 object copa { 
-	var property position
+	var property position = game.at(1,1)
 	method tocarPosicion(pos) {
 		position = pos
 	}
@@ -135,7 +135,8 @@ class Tarjeta {
 	
 	method image() = if(roja) "roja.png" else "amarilla.png"	
 }
-class Juez inherits Tarjeta {
+
+class JuezRandom inherits Tarjeta {
 	
 	var property anterior = game.center()
 	const movimientos= [izquierda,derecha,abajo,arriba] 
@@ -150,6 +151,58 @@ class Juez inherits Tarjeta {
 	}
 	method movimiento(){
 		const dir = movimientos.get(0.randomUpTo(4).truncate(0))
+        game.onTick(150,"moverJuez",{self.moverA(dir)})
+	}
+
+	method moverA(dir) {
+		anterior = position
+		position = dir.siguientePosicion(position) 
+	}
+
+	 override method image() = if(roja) "arbitroRoja.png" else "arbitroAmarilla.png"
+}
+
+class JuezArribaAbajo inherits Tarjeta {
+	
+	var property anterior = game.center()
+	const movimientos= [abajo,arriba] 
+	
+	method modificarPosicion(pos) {
+		position = pos
+	}
+	
+	method parar(){
+	game.removeTickEvent("moverJuez")
+	self.movimiento()
+	}
+	method movimiento(){
+		const dir = movimientos.get(0.randomUpTo(2).truncate(0))
+        game.onTick(150,"moverJuez",{self.moverA(dir)})
+	}
+
+	method moverA(dir) {
+		anterior = position
+		position = dir.siguientePosicion(position) 
+	}
+
+	 override method image() = if(roja) "arbitroRoja.png" else "arbitroAmarilla.png"
+}
+
+class JuezDerechaIzquierda inherits Tarjeta {
+	
+	var property anterior = game.center()
+	const movimientos= [izquierda,derecha] 
+	
+	method modificarPosicion(pos) {
+		position = pos
+	}
+	
+	method parar(){
+	game.removeTickEvent("moverJuez")
+	self.movimiento()
+	}
+	method movimiento(){
+		const dir = movimientos.get(0.randomUpTo(2).truncate(0))
         game.onTick(150,"moverJuez",{self.moverA(dir)})
 	}
 

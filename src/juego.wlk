@@ -12,28 +12,31 @@ object juego {
 		musicaDeFondo.volume(0.02)
 		
 	}
-	method schedulizar() {
+	method volverAlMenu(imagen) {
 		game.clear()
-		game.schedule(200,{=>self.cargarMenu()})
+		const titulito = new CuadradoNivel(position = game.center().left(1),image=imagen)
+		game.schedule(100,{=>game.addVisual(titulito)}) 
+		game.schedule(2000,{=>self.cargarMenu()})
+		
 	}
 	method perdiste(tipo){
-		if (tipo) {
-		const titulito = new CuadradoNivel(position = game.center().left(1),image="perdiste.png")
 		game.schedule(200,{=>game.say(jugador,"Perdimos el partido")})
-		game.schedule(500,{=>game.addVisual(titulito)}) 
+		if (tipo) {
+		
+		game.schedule(3000,{=>self.volverAlMenu("perdiste.png")})
+		
 		} else {
-			const titulito = new CuadradoNivel(position = game.center().left(1),image="moriste.png")
-			game.schedule(500,{=>game.addVisual(titulito)}) 
+			game.schedule(3000,{=>self.volverAlMenu("moriste.png")})
 		}
 		
-		game.schedule(2000,{=>self.schedulizar()})
+		
 		
 	}
 	method ganaste(){
-		const titulito = new CuadradoNivel(position = game.center().left(1),image="ganaste.png")
+
 		game.schedule(200,{=>game.say(jugador,"Ganamos el partido")})
-		game.schedule(500,{=>game.addVisual(titulito)}) 
-		game.schedule(2000,{=>self.schedulizar()})
+		
+		game.schedule(3000,{=>self.volverAlMenu("ganaste.png")})
 		
 	}
 	method cargarMenu(){
@@ -103,14 +106,26 @@ object juego {
 		const un225 = new Un225(position = posicion)
 		game.addVisual(un225)
 	}
-	method nuevoJuez(posicion,color){
-		const juez = new Juez(position = posicion,roja = color)
+	method nuevoJuezRandom(posicion,color){
+		const juez = new JuezRandom(position = posicion,roja = color)
+		game.addVisual(juez)
+		game.onCollideDo(juez,{personaje=>personaje.choque(juez)})
+		juez.movimiento()
+	}
+	method nuevoJuezArribaAbajo(posicion,color){
+		const juez = new JuezArribaAbajo(position = posicion,roja = color)
+		game.addVisual(juez)
+		game.onCollideDo(juez,{personaje=>personaje.choque(juez)})
+		juez.movimiento()
+	}
+	method nuevoJuezDerechaIzquierda(posicion,color){
+		const juez = new JuezDerechaIzquierda(position = posicion,roja = color)
 		game.addVisual(juez)
 		game.onCollideDo(juez,{personaje=>personaje.choque(juez)})
 		juez.movimiento()
 	}
 	method aparecerCopa() {
-		copa.tocarPosicion(game.origin().up(1).right(4))
+		
 		game.addVisual(copa)
 		
 	}

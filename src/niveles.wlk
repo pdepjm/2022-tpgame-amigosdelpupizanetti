@@ -21,28 +21,32 @@ object nivel1 inherits Nivel {
 		super()
 		const paredesNuevas = [game.origin().up(1).right(13),game.origin().up(2).right(1),game.origin().up(2).right(3),game.origin().up(2).right(5),game.origin().up(2).right(7),
 							game.origin().up(2).right(9),game.origin().up(2).right(11),
-							game.origin().up(3).right(1),game.origin().up(4).right(13),game.origin().up(4).right(9),game.origin().up(4).right(12),
+							game.origin().up(3).right(1),game.origin().up(4).right(13),game.origin().up(10).right(9),game.origin().up(4).right(12),
 							game.origin().up(5).right(1),game.origin().up(5).right(11),game.origin().up(4).right(3),game.origin().up(4).right(5),game.origin().up(4).right(7),
 							game.origin().up(6).right(2),game.origin().up(6).right(4),game.origin().up(6).right(6),game.origin().up(6).right(8),
 							game.origin().up(8).right(2),game.origin().up(8).right(4),game.origin().up(8).right(6),game.origin().up(8).right(8),game.origin().up(8).right(10),
-							game.origin().up(8).right(1),game.origin().up(7).right(1),game.origin().up(10).right(2),game.origin().up(10).right(4),game.origin().up(10).right(6),
-							game.origin().up(10).right(8),game.origin().up(10).right(11),game.origin().up(10).right(12),game.origin().up(10).right(13),game.origin().up(8).right(12)]
+							game.origin().up(8).right(1),game.origin().up(7).right(2),game.origin().up(10).right(2),game.origin().up(10).right(4),game.origin().up(10).right(6),
+							game.origin().up(10).right(8),game.origin().up(10).right(11),game.origin().up(10).right(12),game.origin().up(10).right(13),game.origin().up(8).right(12),
+							game.origin().up(8).right(3),game.origin().up(10).right(1)]
 		const estrellasNivel = []
+		//132 12 5
+		const tarjetasAmarillas = [game.at(13,2),game.at(12,6)]
+		const juez = [game.at(9,5)]
 		estrellasNivel.add(game.origin().up(1).right(12))
 		estrellasNivel.add(game.origin().up(3).right(3))
 		estrellasNivel.add(game.origin().up(5).right(10))
 		estrellasNivel.add(game.origin().up(5).right(13))
-		estrellasNivel.add(game.origin().up(7).right(2))
+		estrellasNivel.add(game.origin().up(7).right(3))
 		estrellasNivel.add(game.origin().up(9).right(1))
 		estrellasNivel.add(game.origin().up(9).right(13))
 		jugador.ponerObjetivo(estrellasNivel.size())					
-		paredesNuevas.forEach{pos=>juego.nuevaPared(pos,"mbappe.png")}
+		paredesNuevas.forEach{pos=>juego.nuevaPared(pos,"cono.png")}
 		
 		const opcion1 = new CuadradoNivel(position = game.center().left(2).up(5),image="nivel1.png")
 		game.addVisual(opcion1)
-	
-	estrellasNivel.forEach{pos=>juego.nuevaEstrella(pos)}
-	
+		tarjetasAmarillas.forEach{pos=>juego.nuevaTarjeta(pos,false)}
+		estrellasNivel.forEach{pos=>juego.nuevaEstrella(pos)}
+		juez.forEach{pos=>juego.nuevoJuezArribaAbajo(pos,false)}
 	}
 	method posicion () = game.center().left(5).down(3)
 	
@@ -52,33 +56,33 @@ object nivel2 inherits Nivel{
 	
 	override method cargar() {
 		super()
-		const jugadoresArgentina = [game.origin().up(1).right(3),game.origin().up(12).right(2),game.origin().up(11).right(3),game.origin().up(10).right(1)]
-		const jugadoresPolonia = []
+		const conos = [game.at(3,1),game.at(3,8),game.at(1,9),game.at(3,10),game.at(4,10),game.at(5,10),game.at(6,10),
+			game.at(7,10),game.at(8,9),game.at(6,6),game.at(6,5),game.at(4,2),game.at(4,3),game.at(2,5),game.at(13,2),game.at(12,6),game.at(10,8)]
+		const jugadores = [game.at(3,4),game.at(10,11),game.at(8,10),game.at(2,10),game.at(7,1),game.at(8,4)]
+		const poblas = [game.at(6,9),game.at(9,2)]
+		const dosveintes = [game.at(4,1)]
+		
 		const estrellasNivel = []
 		const tarjetasRojas = []
-		const tarjetasAmarillas = []
-		const juez = [game.center()]
-		jugadoresPolonia.add(game.origin().up(9).right(4))
-		jugadoresPolonia.add(game.origin().up(13).right(11))
-		jugadoresPolonia.add(game.origin().up(11).right(10))
-		jugadoresPolonia.add(game.origin().up(3).right(4))
-		jugadoresPolonia.add(game.origin().up(2).right(12))
-		tarjetasRojas.add(game.origin().up(4).right(2))
-		tarjetasAmarillas.add(game.origin().up(1).right(2))
+		const tarjetasAmarillas = [game.at(8,1),game.at(5,6)]
+		const juez = [game.at(7,6)]
 		
-		estrellasNivel.add(game.origin().up(12).right(3))
-		estrellasNivel.add(game.origin().up(2).right(11))
-		estrellasNivel.add(game.origin().up(3).right(1))
+		tarjetasRojas.add(game.at(2,4))
+		
+		copa.tocarPosicion(game.at(1,3))
+		estrellasNivel.add(game.at(4,4))
+		estrellasNivel.add(game.at(7,8))
+		estrellasNivel.add(game.at(12,2))
 		jugador.ponerObjetivo(estrellasNivel.size())					
 		
 		tarjetasRojas.forEach{pos=>juego.nuevaTarjeta(pos,true)}
 		tarjetasAmarillas.forEach{pos=>juego.nuevaTarjeta(pos,false)}
-		jugadoresArgentina.forEach{pos=>juego.nuevaPared(pos,"mbappe.png")}
-		jugadoresPolonia.forEach{pos=>juego.nuevaPared(pos,"hinchaRiver.png")}
+		conos.forEach{pos=>juego.nuevaPared(pos,"cono.png")}
+		jugadores.forEach{pos=>juego.nuevaPared(pos,"hinchaRiver.png")}
 		estrellasNivel.forEach{pos=>juego.nuevaEstrella(pos)}
-		juez.forEach{pos=>juego.nuevoJuez(pos,false)}
-		
-		
+		juez.forEach{pos=>juego.nuevoJuezDerechaIzquierda(pos,false)}
+		poblas.forEach{pos=>juego.nuevoPobla(pos)}
+		dosveintes.forEach{pos=>juego.nuevo225(pos)}
 		const opcion2 = new CuadradoNivel(position = game.center().left(2).up(5),image="nivel2.png")
 		game.addVisual(opcion2)
 		
