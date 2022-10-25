@@ -11,6 +11,7 @@ class Nivel {
 		keyboard.a().onPressDo({jugador.movimiento(izquierda)})
 		juego.agregarParedes()
 		juego.agregarJugador()
+		
 		const titulo = new CuadradoNivel(position = game.center().left(6).up(5),image="titulo.png")
 		game.addVisual(titulo) 
 }
@@ -97,16 +98,28 @@ object nivel2 inherits Nivel{
 object nivel3 inherits Nivel{
 	override method cargar() {
 		super()
-		
+		const conos = [game.at(2,2),game.at(3,2),game.at(4,2),game.at(5,2),game.at(6,2),game.at(7,2),game.at(8,2),game.at(9,2),game.at(10,2),game.at(11,2),game.at(12,2)
+		,game.at(12,4),game.at(12,6),game.at(11,4),game.at(10,4),game.at(9,4),game.at(7,5),game.at(7,4),game.at(7,3),game.at(5,3),game.at(5,5),game.at(4,5)
+		,game.at(4,6),game.at(4,7),game.at(4,8),game.at(3,7),game.at(2,7),game.at(6,7),game.at(7,7),game.at(7,6),game.at(8,9),game.at(1,4),game.at(2,4)
+		,game.at(1,10),game.at(2,10),game.at(3,10),game.at(4,10),game.at(5,10),game.at(6,10),game.at(7,10),game.at(8,10),game.at(9,8),game.at(10,8),game.at(11,8),game.at(12,8),game.at(13,8),game.at(9,7),game.at(9,6)]
+		const dosveintes = [game.at(6,3)]
+		const estrellasNivel = [game.at(10,5),game.at(1,8),game.at(7,8)]
+		const poblas = [game.at(5,1)] 
+		const tarjetasAmarillas = [game.at(11,3),game.at(5,6),game.at(6,8)]
+		const tarjetasRojas = [game.at(1,5)]
+		const arbitroRandom = [game.at(13,5)]
+		const arbitroIzqDer = [game.at(4,9)]
 		const opcion3 = new CuadradoNivel(position = game.center().left(2).up(5),image="nivel3.png")
+		jugador.ponerObjetivo(estrellasNivel.size())
 		game.addVisual(opcion3)
-		
-		const poblas = [game.origin().up(1).right(4)]
+		jugador.position(game.at(7,1))
+		arbitroRandom.forEach{pos=>juego.nuevoJuezRandom(pos,true)}
 		poblas.forEach{pos=>juego.nuevoPobla(pos)}
-		const dosveintes = [game.origin().up(1).right(7)]
+		conos.forEach{pos=>juego.nuevaPared(pos,"cono.png")}
+		estrellasNivel.forEach{pos=>juego.nuevaEstrella(pos)}
 		dosveintes.forEach{pos=>juego.nuevo225(pos)}
-		const tarjetasAmarillas = [game.origin().up(1).right(8),game.origin().up(1).right(6)]
 		tarjetasAmarillas.forEach{pos=>juego.nuevaTarjeta(pos,false)}
+		arbitroIzqDer.forEach{pos=>juego.nuevoJuezDerechaIzquierda(pos,false)}
 	}
 	
 	method posicion () = game.center().right(5).down(3)
