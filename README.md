@@ -10,9 +10,9 @@
 ## Capturas
 
 ![mi foto](capturas/menu.jpg)
-![mi foto](capturas/nivel1.jpg)
-![mi foto](capturas/nivel2.jpg)
-![mi foto](capturas/nivel2.jpg)
+![mi foto](capturas/capturaNivel1.jpg)
+![mi foto](capturas/capturaNivel2.jpg)
+
 ## Reglas de Juego / Instrucciones
 
 Agarre las estrellitas para que aparezca la copa!
