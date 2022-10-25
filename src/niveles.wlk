@@ -19,7 +19,8 @@ class Nivel {
 object nivel1 inherits Nivel {
 	override method cargar() {
 		super()
-		const paredesNuevas = [game.origin().up(1).right(13),game.origin().up(2).right(1),game.origin().up(2).right(3),game.origin().up(2).right(5),game.origin().up(2).right(7),
+		const dosveintes = [game.at(2,3),game.at(3,9)]
+		const paredesNuevas = [game.origin().up(1).right(13),game.origin().up(2).right(3),game.origin().up(2).right(5),game.origin().up(2).right(7),
 							game.origin().up(2).right(9),game.origin().up(2).right(11),
 							game.origin().up(3).right(1),game.origin().up(4).right(13),game.origin().up(10).right(9),game.origin().up(4).right(12),
 							game.origin().up(5).right(1),game.origin().up(5).right(11),game.origin().up(4).right(3),game.origin().up(4).right(5),game.origin().up(4).right(7),
@@ -27,13 +28,13 @@ object nivel1 inherits Nivel {
 							game.origin().up(8).right(2),game.origin().up(8).right(4),game.origin().up(8).right(6),game.origin().up(8).right(8),game.origin().up(8).right(10),
 							game.origin().up(8).right(1),game.origin().up(7).right(2),game.origin().up(10).right(2),game.origin().up(10).right(4),game.origin().up(10).right(6),
 							game.origin().up(10).right(8),game.origin().up(10).right(11),game.origin().up(10).right(12),game.origin().up(10).right(13),game.origin().up(8).right(12),
-							game.origin().up(8).right(3),game.origin().up(10).right(1)]
-		const estrellasNivel = []
-		//132 12 5
-		const tarjetasAmarillas = [game.at(13,2),game.at(12,6)]
+							game.origin().up(8).right(3),game.origin().up(10).right(1),game.at(4,2),game.at(3,3)]
+		const estrellasNivel = [game.at(12,1)]
+		const tarjetasAmarillas = [game.at(13,2),game.at(2,5)]
 		const juez = [game.at(9,5)]
-		estrellasNivel.add(game.origin().up(1).right(12))
-		estrellasNivel.add(game.origin().up(3).right(3))
+		copa.tocarPosicion(game.at(1,1))
+		
+		
 		estrellasNivel.add(game.origin().up(5).right(10))
 		estrellasNivel.add(game.origin().up(5).right(13))
 		estrellasNivel.add(game.origin().up(7).right(3))
@@ -47,6 +48,7 @@ object nivel1 inherits Nivel {
 		tarjetasAmarillas.forEach{pos=>juego.nuevaTarjeta(pos,false)}
 		estrellasNivel.forEach{pos=>juego.nuevaEstrella(pos)}
 		juez.forEach{pos=>juego.nuevoJuezArribaAbajo(pos,false)}
+		dosveintes.forEach{pos=>juego.nuevo225(pos)}
 	}
 	method posicion () = game.center().left(5).down(3)
 	
@@ -70,9 +72,11 @@ object nivel2 inherits Nivel{
 		tarjetasRojas.add(game.at(2,4))
 		
 		copa.tocarPosicion(game.at(1,3))
+		
 		estrellasNivel.add(game.at(4,4))
 		estrellasNivel.add(game.at(7,8))
 		estrellasNivel.add(game.at(12,2))
+		
 		jugador.ponerObjetivo(estrellasNivel.size())					
 		
 		tarjetasRojas.forEach{pos=>juego.nuevaTarjeta(pos,true)}

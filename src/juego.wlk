@@ -14,9 +14,10 @@ object juego {
 	}
 	method volverAlMenu(imagen) {
 		game.clear()
-		const titulito = new CuadradoNivel(position = game.center().left(1),image=imagen)
+		const titulito = new CuadradoNivel(position = game.center().left(3),image=imagen)
 		game.schedule(100,{=>game.addVisual(titulito)}) 
-		game.schedule(2000,{=>self.cargarMenu()})
+		game.schedule(2900,{=>game.removeVisual(titulito)}) 
+		game.schedule(3000,{=>self.cargarMenu()})
 		
 	}
 	method perdiste(tipo){
