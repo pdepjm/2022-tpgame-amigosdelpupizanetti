@@ -138,14 +138,12 @@ class Tarjeta {
 class Juez inherits Tarjeta {
 	
 	var property anterior = game.center()
+
 	method modificarPosicion(pos) {
 		position = pos
 	}
 	
-	method parar(){
-	game.removeTickEvent("moverJuez")
-	self.movimiento()
-	}
+
 	method movimiento()
 	method moverA(dir) {
 		anterior = position
@@ -159,43 +157,38 @@ class JuezRandom inherits Juez {
 	const movimientos= [izquierda,derecha,abajo,arriba] 
 	override method movimiento(){
 		const dir = movimientos.get(0.randomUpTo(4).truncate(0))
-        game.onTick(150,"moverJuez",{self.moverA(dir)})
+        game.onTick(150,"moverJuezRandom",{self.moverA(dir)})
 	}
-
+	method parar(){
+	game.removeTickEvent("moverJuezRandom")
+	self.movimiento()
+	}
 	
 }
 
-class JuezArribaAbajo inherits Juez {
+class JuezDirecciones inherits Juez {
 	
-	const movimientos= [abajo,arriba] 
-	var direccion = true
-	override method movimiento(){
-		
-		if (direccion)
+	const movimientos
+	var direccion = false
+	 override method movimiento(){
+		if (direccion){
         game.onTick(200,"moverJuez",{self.moverA(movimientos.get(0))})
-        else
+        direccion = false
+        }
+        else{
         game.onTick(200,"moverJuez",{self.moverA(movimientos.get(1))})
+        direccion = true
+        }
+        }
         
-        direccion.negate()
+    method parar(){
+	game.removeTickEvent("moverJuez")
+	self.movimiento()
 	}
-
 	
 }
 
-class JuezDerechaIzquierda inherits Juez {
-	
-	const movimientos= [izquierda,derecha] 
-	var direccion = true
-	override method movimiento(){
-		if (direccion)
-        game.onTick(200,"moverJuez",{self.moverA(movimientos.get(0))})
-        else
-        game.onTick(200,"moverJuez",{self.moverA(movimientos.get(1))})
-        
-        direccion.negate()
-	}
 
-}
 
 class CuadradoNivel{
 	var property image
@@ -282,6 +275,4 @@ object flecha{
 	}
 
 }
-
-
 
