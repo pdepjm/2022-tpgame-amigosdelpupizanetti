@@ -115,13 +115,13 @@ object juego {
 		juez.movimiento()
 	}
 	method nuevoJuezArribaAbajo(posicion,color){
-		const juez = new JuezArribaAbajo(position = posicion,roja = color)
+		const juez = new JuezDirecciones(position = posicion,roja = color,movimientos= [abajo,arriba] )
 		game.addVisual(juez)
 		game.onCollideDo(juez,{personaje=>personaje.choque(juez)})
 		juez.movimiento()
 	}
 	method nuevoJuezDerechaIzquierda(posicion,color){
-		const juez = new JuezDerechaIzquierda(position = posicion,roja = color)
+		const juez = new JuezDirecciones(position = posicion,roja = color, movimientos = [izquierda,derecha] )
 		game.addVisual(juez)
 		game.onCollideDo(juez,{personaje=>personaje.choque(juez)})
 		juez.movimiento()
@@ -135,7 +135,6 @@ object juego {
 
 	
 }
-
 
 
 
