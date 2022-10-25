@@ -168,10 +168,15 @@ class JuezRandom inherits Juez {
 class JuezArribaAbajo inherits Juez {
 	
 	const movimientos= [abajo,arriba] 
-	
+	var direccion = true
 	override method movimiento(){
-		const dir = movimientos.get(0.randomUpTo(2).truncate(0))
-        game.onTick(200,"moverJuez",{self.moverA(dir)})
+		
+		if (direccion)
+        game.onTick(200,"moverJuez",{self.moverA(movimientos.get(0))})
+        else
+        game.onTick(200,"moverJuez",{self.moverA(movimientos.get(1))})
+        
+        direccion.negate()
 	}
 
 	
@@ -180,10 +185,14 @@ class JuezArribaAbajo inherits Juez {
 class JuezDerechaIzquierda inherits Juez {
 	
 	const movimientos= [izquierda,derecha] 
-	
+	var direccion = true
 	override method movimiento(){
-		const dir = movimientos.get(0.randomUpTo(2).truncate(0))
-        game.onTick(200,"moverJuez",{self.moverA(dir)})
+		if (direccion)
+        game.onTick(200,"moverJuez",{self.moverA(movimientos.get(0))})
+        else
+        game.onTick(200,"moverJuez",{self.moverA(movimientos.get(1))})
+        
+        direccion.negate()
 	}
 
 }

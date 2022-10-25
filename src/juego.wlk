@@ -21,12 +21,13 @@ object juego {
 		
 	}
 	method perdiste(tipo){
-		game.schedule(200,{=>game.say(jugador,"Perdimos el partido")})
-		if (tipo) {
 		
+		if (tipo) {
+		game.schedule(200,{=>game.say(jugador,"Estoy expulsado")})
 		game.schedule(3000,{=>self.volverAlMenu("perdiste.png")})
 		
 		} else {
+			game.schedule(200,{=>game.say(jugador,"Me lesioné")})
 			game.schedule(3000,{=>self.volverAlMenu("moriste.png")})
 		}
 		
