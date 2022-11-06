@@ -2,10 +2,10 @@
 
 ## Equipo de desarrollo
 
-- Gurruchaga
-- Ondjian
-- Prestia
-- Rodriguez
+- Marcos Gurruchaga
+- Gregorio Ondjian
+- Luca Prestia
+- Junior Rodriguez
 
 ## Capturas
 
@@ -15,7 +15,7 @@
 
 ## Reglas de Juego / Instrucciones
 
-Agarre las estrellitas para que aparezca la copa!
+Agarrá las estrellitas para que aparezca la copa!
 Cuidado con pablo perez, los arbitros y las tarjetas!
 No olvide de tocar el articulo 225 para anular sus amarillas!
 
