@@ -113,6 +113,7 @@ object nivel3 inherits Nivel{
 		jugador.ponerObjetivo(estrellasNivel.size())
 		game.addVisual(opcion3)
 		jugador.position(game.at(7,1))
+		copa.tocarPosicion(game.at(6,1))
 		arbitroRandom.forEach{pos=>juego.nuevoJuezRandom(pos,true)}
 		poblas.forEach{pos=>juego.nuevoPobla(pos)}
 		conos.forEach{pos=>juego.nuevaPared(pos,"cono.png")}
