@@ -7,6 +7,9 @@
 - Luca Prestia
 - Junior Rodriguez
 
+## Trailer
+https://youtu.be/uPzdDQqDV3U
+
 ## Capturas
 
 ![mi foto](capturas/menu.jpg)
