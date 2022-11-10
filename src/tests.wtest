@@ -1,5 +1,6 @@
 import objetos.*
 import wollok.game.*
+import objetos.*
 describe "testObstaculos" {
 	
 	test "Tocar una amarilla suma una amarilla al jugador" {
@@ -10,6 +11,16 @@ describe "testObstaculos" {
 		assert.equals(jugador.cuantasAmarillas(),1)
 
 	}
+	test "Tocar una 255 limpia una amarilla al jugador" {
+		const un255 = new Un225(position = game.at(1,1))
+		const tarjetita = new Tarjeta(position = game.at(1,1),roja=false)
+		game.addVisual(tarjetita)
+		game.addVisual(jugador)
+		tarjetita.choque(jugador)
+		game.addVisual(un255)
+		un255.choque(jugador)
+		assert.equals(jugador.cuantasAmarillas(),0)
 
+	}
 
 }
