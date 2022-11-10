@@ -22,5 +22,13 @@ describe "testObstaculos" {
 		assert.equals(jugador.cuantasAmarillas(),0)
 
 	}
+		test "Tocar una 255 sin una amarilla al jugador lo deja igual" {
+		const un255 = new Un225(position = game.at(1,1))
+		game.addVisual(jugador)
+		game.addVisual(un255)
+		un255.choque(jugador)
+		assert.equals(jugador.cuantasAmarillas(),0)
+	}
+	
 
 }
