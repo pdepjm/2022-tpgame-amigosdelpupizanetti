@@ -125,7 +125,7 @@ class Tarjeta {
 				game.removeVisual(self)
 				pj.sumarTarjeta()
 				game.say(jugador,"Tengo una amarilla")
-				game.sound("silbato.mp3").play()
+				game.schedule(1,{game.sound("silbato.mp3").play()})
 				}
 		} 
 		
