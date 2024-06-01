@@ -24,6 +24,6 @@ No olvide de tocar el articulo 225 para anular sus amarillas!
 
 Controles - WASD
 
-## Otros
-Paradigmas de programación. Cursos K2004 y K2104
+## Descripcion
+Juego creado durante la cursada de Paradigmas de programación 2022. Cursos K2004 y K2104
 
